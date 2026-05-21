@@ -21,7 +21,7 @@ export function Reveal({ children, className = "", delay = 0, as = "h2" }: Props
     io.observe(el);
     return () => io.disconnect();
   }, [delay]);
-  const Tag = as as keyof JSX.IntrinsicElements;
+  const Tag = as as keyof React.JSX.IntrinsicElements;
   return (
     // @ts-expect-error dynamic tag
     <Tag ref={ref} className={className} style={{ opacity: 0 }}>

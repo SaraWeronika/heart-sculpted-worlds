@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Reveal } from "@/components/RevealText";
-import { categories, getCategory } from "@/lib/products";
+import { categories, getCategory, type Category } from "@/lib/products";
 
 export const Route = createFileRoute("/collezioni/$category")({
   loader: ({ params }) => {
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/collezioni/$category")({
 });
 
 function CategoryPage() {
-  const { category } = Route.useLoaderData();
+  const { category } = Route.useLoaderData() as { category: Category };
   const others = categories.filter((c) => c.slug !== category.slug);
 
   return (
