@@ -9,38 +9,184 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as PackagingRouteImport } from './routes/packaging'
+import { Route as ManifestoRouteImport } from './routes/manifesto'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as ContattiRouteImport } from './routes/contatti'
+import { Route as CollezioniRouteImport } from './routes/collezioni'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CollezioniIndexRouteImport } from './routes/collezioni.index'
+import { Route as CollezioniCategoryRouteImport } from './routes/collezioni.$category'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PackagingRoute = PackagingRouteImport.update({
+  id: '/packaging',
+  path: '/packaging',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManifestoRoute = ManifestoRouteImport.update({
+  id: '/manifesto',
+  path: '/manifesto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContattiRoute = ContattiRouteImport.update({
+  id: '/contatti',
+  path: '/contatti',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollezioniRoute = CollezioniRouteImport.update({
+  id: '/collezioni',
+  path: '/collezioni',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollezioniIndexRoute = CollezioniIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CollezioniRoute,
+} as any)
+const CollezioniCategoryRoute = CollezioniCategoryRouteImport.update({
+  id: '/$category',
+  path: '/$category',
+  getParentRoute: () => CollezioniRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/collezioni': typeof CollezioniRouteWithChildren
+  '/contatti': typeof ContattiRoute
+  '/faq': typeof FaqRoute
+  '/manifesto': typeof ManifestoRoute
+  '/packaging': typeof PackagingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collezioni/$category': typeof CollezioniCategoryRoute
+  '/collezioni/': typeof CollezioniIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contatti': typeof ContattiRoute
+  '/faq': typeof FaqRoute
+  '/manifesto': typeof ManifestoRoute
+  '/packaging': typeof PackagingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collezioni/$category': typeof CollezioniCategoryRoute
+  '/collezioni': typeof CollezioniIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/collezioni': typeof CollezioniRouteWithChildren
+  '/contatti': typeof ContattiRoute
+  '/faq': typeof FaqRoute
+  '/manifesto': typeof ManifestoRoute
+  '/packaging': typeof PackagingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/collezioni/$category': typeof CollezioniCategoryRoute
+  '/collezioni/': typeof CollezioniIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/collezioni'
+    | '/contatti'
+    | '/faq'
+    | '/manifesto'
+    | '/packaging'
+    | '/sitemap.xml'
+    | '/collezioni/$category'
+    | '/collezioni/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/contatti'
+    | '/faq'
+    | '/manifesto'
+    | '/packaging'
+    | '/sitemap.xml'
+    | '/collezioni/$category'
+    | '/collezioni'
+  id:
+    | '__root__'
+    | '/'
+    | '/collezioni'
+    | '/contatti'
+    | '/faq'
+    | '/manifesto'
+    | '/packaging'
+    | '/sitemap.xml'
+    | '/collezioni/$category'
+    | '/collezioni/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CollezioniRoute: typeof CollezioniRouteWithChildren
+  ContattiRoute: typeof ContattiRoute
+  FaqRoute: typeof FaqRoute
+  ManifestoRoute: typeof ManifestoRoute
+  PackagingRoute: typeof PackagingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/packaging': {
+      id: '/packaging'
+      path: '/packaging'
+      fullPath: '/packaging'
+      preLoaderRoute: typeof PackagingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manifesto': {
+      id: '/manifesto'
+      path: '/manifesto'
+      fullPath: '/manifesto'
+      preLoaderRoute: typeof ManifestoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contatti': {
+      id: '/contatti'
+      path: '/contatti'
+      fullPath: '/contatti'
+      preLoaderRoute: typeof ContattiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collezioni': {
+      id: '/collezioni'
+      path: '/collezioni'
+      fullPath: '/collezioni'
+      preLoaderRoute: typeof CollezioniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +194,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collezioni/': {
+      id: '/collezioni/'
+      path: '/'
+      fullPath: '/collezioni/'
+      preLoaderRoute: typeof CollezioniIndexRouteImport
+      parentRoute: typeof CollezioniRoute
+    }
+    '/collezioni/$category': {
+      id: '/collezioni/$category'
+      path: '/$category'
+      fullPath: '/collezioni/$category'
+      preLoaderRoute: typeof CollezioniCategoryRouteImport
+      parentRoute: typeof CollezioniRoute
+    }
   }
 }
 
+interface CollezioniRouteChildren {
+  CollezioniCategoryRoute: typeof CollezioniCategoryRoute
+  CollezioniIndexRoute: typeof CollezioniIndexRoute
+}
+
+const CollezioniRouteChildren: CollezioniRouteChildren = {
+  CollezioniCategoryRoute: CollezioniCategoryRoute,
+  CollezioniIndexRoute: CollezioniIndexRoute,
+}
+
+const CollezioniRouteWithChildren = CollezioniRoute._addFileChildren(
+  CollezioniRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CollezioniRoute: CollezioniRouteWithChildren,
+  ContattiRoute: ContattiRoute,
+  FaqRoute: FaqRoute,
+  ManifestoRoute: ManifestoRoute,
+  PackagingRoute: PackagingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
